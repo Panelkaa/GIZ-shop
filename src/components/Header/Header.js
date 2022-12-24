@@ -1,64 +1,146 @@
- import React from 'react'
- import './Header.css'
+import React from 'react'
+import './Header.css'
 import DownHeader from './DownHeader/DownHeader';
- 
- function Header() {
-   return (
-     <div>
-        <header id="home" class="header">
-    <nav class="nav">
-      <div class="navigation container">
-        <div class="logo">
-          <h1>GIZ</h1>
-        </div>
+import { Link } from 'react-router-dom';
+import { Icon } from '@iconify/react';
+import {Navigate } from 'react-router-dom'
+import {useDispatch} from 'react-redux';
+import { useAuth } from '../../hooks/use-auth';
+import {removeUser} from '../../store/slice/userSlice.js';
 
-        <div class="menu">
-          <div class="top-nav">
-            <div class="logo">
+ function Header() {
+  const dispatch = useDispatch()
+  const {isAuth, email} = useAuth()
+  console.log(email);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+   return isAuth ? (
+    // <div>
+    //   <h1>Welcome</h1>
+
+    //   <button onClick={() => dispatch(removeUser)}>Log out from {email}</button>
+    // </div>
+    <div>
+    <header id="home" className="header">
+      <nav className="nav">
+        <div className="navigation container">
+          <div className="logo">
+            <h1 className='logo__text'>GIZ</h1>
+          </div>
+
+        <div className="menu">
+          <div className="top-nav">
+            <div className="logo">
               <h1>GIZ</h1>
             </div>
-            <div class="close">
-              <i class="bx bx-x"></i>
+            <div className="close">
+              <i className="bx bx-x"></i>
             </div>
           </div>
 
-          <ul class="nav-list">
-            <li class="nav-item">
-              <a href="#home" class="nav-link scroll-link">Главная</a>
+          <ul className="nav-list">
+          <Link to='/'>
+            <li className="nav-item">Главная
+            {/* <a href="giz" className="nav-link scroll-link">Главная</a> */}
             </li>
-            <li class="nav-item">
-              <a href="product.html" class="nav-link ">Товары</a>
+          </Link>
+          <Link to='/GIZ/Product'>
+            <li className="nav-item">Товары
+              {/* <a href="product.html" className="nav-link ">Товары</a> */}
             </li>
-            <li class="nav-item">
-              <a href="#about" class="nav-link">Контакты</a>
+          </Link>
+            <li className="nav-item">
+              <a href="#about" className="nav-link">Контакты</a>
             </li>
-            <li class="nav-item">
-              <a href="form.html" class="nav-link">Регистрация</a>
-
-            </li>
-            <li class="nav-item">
-              <a href="enter.html" class="nav-link">Вход</a>
-
-            </li>
-            <li class="nav-item">
-              <a href="cart.html" class="nav-link icon">
-                  <i class="bx bx-shopping-bag"></i>
-                  <span class="nav-link check">1</span>
-              </a>
-            </li>
+          <Link to='/GIZ'>{isAuth ? (<span>{email} <button className='exit__btn' onClick={() => dispatch(removeUser)}>Log out</button> </span>) : (<li className="nav-item" >
+            Вход
+            </li>)}
+          </Link>       
+            <Link to='/GIZ/Basket'>
+              <li className="nav-item">
+                {/* <a href="cart.html" className="nav-link icon"> */}
+                <Icon icon="bx:shopping-bag" width="24px"/>
+                    <span className="nav-link check">1</span>
+                {/* </a> */}
+              </li>
+            </Link>
           </ul>
         </div>
 
-        <a href="cart.html" class="cart-icon">
-          <i class="bx bx-shopping-bag"></i>
+        <a href="cart.html" className="cart-icon">
+          <i className="bx bx-shopping-bag"></i>
         </a>
 
-        <div class="hamburger">
-          <i class="bx bx-menu"></i>
+        <div className="hamburger">
+          <i className="bx bx-menu"></i>
         </div>
       </div>
     </nav>
     <DownHeader />
+    {/* <Login render={(props)=> <Login {...props} setIsLoggedIn={setIsLoggedIn}/>} props={props} /> */}
+  </header>
+     </div>
+   
+  ) : (  
+     <div>
+
+    <header id="home" className="header">
+      <nav className="nav">
+        <div className="navigation container">
+          <div className="logo">
+            <h1 className='logo__text'>GIZ</h1>
+          </div>
+
+        <div className="menu">
+          <div className="top-nav">
+            <div className="logo">
+              <h1>GIZ</h1>
+            </div>
+            <div className="close">
+              <i className="bx bx-x"></i>
+            </div>
+          </div>
+
+          <ul className="nav-list">
+          <Link to='/'>
+            <li className="nav-item">Главная
+            {/* <a href="giz" className="nav-link scroll-link">Главная</a> */}
+            </li>
+          </Link>
+          <Link to='/GIZ/Product'>
+            <li className="nav-item">Товары
+              {/* <a href="product.html" className="nav-link ">Товары</a> */}
+            </li>
+          </Link>
+            <li className="nav-item">
+              <a href="#about" className="nav-link">Контакты</a>
+            </li>
+          <Link to='/GIZ/Login'>
+            <li className="nav-item">
+            Вход
+            </li>
+          </Link>
+            <Link to='/GIZ/Basket'>
+              <li className="nav-item">
+                {/* <a href="cart.html" className="nav-link icon"> */}
+                <Icon icon="bx:shopping-bag" width="24px"/>
+                    <span className="nav-link check">1</span>
+                {/* </a> */}
+              </li>
+            </Link>
+          </ul>
+        </div>
+
+        <a href="cart.html" className="cart-icon">
+          <i className="bx bx-shopping-bag"></i>
+        </a>
+
+        <div className="hamburger">
+          <i className="bx bx-menu"></i>
+        </div>
+      </div>
+    </nav>
+    <DownHeader />
+    {/* <Login render={(props)=> <Login {...props} setIsLoggedIn={setIsLoggedIn}/>} props={props} /> */}
   </header>
      </div>
    )

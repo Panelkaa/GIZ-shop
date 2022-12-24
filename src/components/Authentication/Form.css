@@ -1,0 +1,55 @@
+#root {
+  height: 100vh;
+}
+
+body {
+  font-family: "Nunito", sans-serif;
+  color: #384047;
+}
+
+.login__page {
+  display: flex;
+  align-items: center;
+  height: 100vh;
+}
+
+.login__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 460px;
+  /* margin: 50% auto; */
+  display: block;
+  margin: 0 auto;
+
+  padding: 10px 20px;
+  background: #f4f7f8;
+  border-radius: 8px;
+}
+
+.modal.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.login__title {
+  padding-top: 10px;
+}
+
+.switch__login {
+  text-align: center;
+}
+
+.switch__link {
+  color: blue;
+}
+
+.switch__link:hover {
+  text-decoration: underline;
+}
+
+@media screen and (min-width: 480px) {
+  form {
+    max-width: 480px;
+  }
+}

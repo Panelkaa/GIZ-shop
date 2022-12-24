@@ -1,0 +1,67 @@
+.product-banner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background-color: #243a6f;
+}
+
+.product-banner .left img {
+  object-fit: cover;
+  height: 100%;
+}
+
+.product-banner .right {
+  align-self: center;
+  text-align: center;
+  padding: 1.6rem;
+}
+
+.product-banner .content h2 {
+  color: #fbb419;
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.product-banner .content .discount {
+  color: #b888ff;
+}
+
+.product-banner .content h1 span {
+  color: #fff;
+  font-size: 6rem;
+  font-weight: 700;
+  display: block;
+  line-height: 1;
+}
+
+.scooter {
+  /* width: 1000px; */
+}
+
+@media only screen and (max-width: 996px) {
+  .product-banner .content h1 span {
+    font-size: 5rem;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .product-banner {
+    grid-template-columns: 1fr;
+  }
+
+  .product-banner .left {
+    display: none;
+  }
+
+  .product-banner .content h1 span {
+    font-size: 4rem;
+  }
+
+  .product-banner .content h2 {
+    font-size: 2rem;
+  }
+
+  .product-banner .content a {
+    padding: 1rem 3rem;
+  }
+}

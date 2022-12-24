@@ -1,16 +1,30 @@
-import React from 'react'
-import Header from './components/Header/Header';
-import RecommendedProducts from './components/Main/Offer/RecommendedProducts';
-import LastProduct from './components/Main/Offer/LastProduct';
+import React, { useState } from 'react'
+import Product from './components/Product/Product';
+import Main from './components/Main/Main';
+import Basket from './components/Basket/Basket';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Registration from './components/Authentication/Registration/Registration';
+import Login from './components/Authentication/Login/Login.js';
 
-const App = () => {
+
+
+function App () {
+  
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   return (
-    <div>
-      <Header />
-      <RecommendedProducts />
-      <LastProduct />
-    </div>
-  )
+    // <BrowserRouter>
+      <Routes>
+        <Route path='/GIZ' element={<Main />}/>
+        <Route path='/GIZ/Product' element={<Product />} />
+        <Route path='/GIZ/Basket' element={<Basket />} />
+        <Route path='/GIZ/Login' element={<Login />} />
+        <Route path='/GIZ/Registration' element={<Registration />} />
+      </Routes>
+      
+        
+    // </BrowserRouter>  
+  );
 }
 
 export default App;

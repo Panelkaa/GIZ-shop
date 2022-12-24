@@ -27,7 +27,32 @@
 }
 
 .nav {
+  width: 100%;
   padding: 1.6rem 0;
+  background-color: rgb(59, 96, 151);
+  color: white;
+  position: fixed;
+  top: 0;
+  z-index: 3;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo__text {
+  margin-bottom: 0;
+}
+
+.exit__btn {
+  width: 60px;
+  height: 25px;
+}
+
+.navigation container {
+  display: flex;
+  align-items: center;
 }
 
 .nav.fix-nav {
@@ -58,18 +83,34 @@
   cursor: pointer;
 }
 
+a {
+  margin: 0;
+  padding: 0;
+}
+
 .nav-list {
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  cursor: pointer;
+}
+
+.nav-item {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  margin-right: 15px;
 }
 
 .nav-item:not(:last-child) {
   margin-right: 0.5rem;
+  cursor: pointer;
+  margin-right: 15px;
 }
 
 .nav-link:link,
 .nav-link:visited {
-  padding: 0.8rem 1rem;
+  /* padding: 0.8rem 1rem; */
   transition: all 300ms ease-in-out;
 }
 
