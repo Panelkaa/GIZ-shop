@@ -1,0 +1,212 @@
+@import url("https://fonts.googleapis.com/css2?family=B612:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+.container-md {
+  max-width: 100rem;
+  margin: 0 auto;
+}
+
+.middle {
+  text-align: center;
+  padding: 25px 0;
+  color: #94999c;
+}
+
+.cart {
+  /* margin: 10rem auto; */
+  padding-top: 10rem;
+  padding-bottom: 10rem;
+  display: block;
+}
+
+.card__order {
+  display: flex;
+  align-items: center;
+}
+
+.order__img {
+  width: 10%;
+  height: 10%;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+}
+
+.order__title {
+  font-family: "Poppins", sans-serif;
+  width: 50%;
+  display: flex;
+  padding-left: 12px;
+  align-items: center;
+  font-size: 1.5rem;
+  line-height: 1.2em;
+  font-weight: 600;
+}
+
+.order__price {
+  width: 15%;
+  display: flex;
+  padding-left: 12px;
+  align-items: center;
+}
+
+.order__delete {
+  /* width: 10px;
+  height: 10px; */
+  font-size: 20px;
+  width: 5%;
+  padding-left: 20px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.order__delete:hover {
+  color: red;
+  transition: 0.2s linear;
+  cursor: pointer;
+}
+
+.count {
+  display: flex;
+  width: 25%;
+}
+
+.count__box {
+  display: flex;
+  padding-left: 30px;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.count__input {
+  width: 50px;
+  height: 30px;
+  border: none;
+  font-size: 18px;
+  border: 1px solid #dddddd;
+  background: #ffffff;
+  color: #444444;
+  text-align: center;
+  padding: 10px;
+  background-color: transparent;
+  text-align: center;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.count__controls {
+  display: flex;
+  flex-direction: column;
+}
+
+.count__up {
+  width: 21px;
+  height: 16px;
+  margin-bottom: 5px;
+}
+
+.count__down {
+  width: 21px;
+  height: 16px;
+}
+
+.order__summa {
+  font-weight: 700;
+  font-family: "Inter", sans-serif;
+  font-size: 1.9rem;
+}
+
+.order__amount-down {
+  font-family: "Inter", sans-serif;
+  font-size: 1.9rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* .cart-info {
+  display: flex;
+  flex-wrap: wrap;
+} */
+/* 
+th {
+  text-align: left;
+  padding: 0.5rem;
+  color: #fff;
+  background-color: #fc7c7c;
+  font-weight: normal;
+} */
+.total {
+  font-size: 16px;
+  font-weight: bold;
+  color: #5a5a5a;
+}
+
+.order__amount {
+  font-size: 20px;
+  font-weight: bold;
+  color: #5a5a5a;
+}
+
+.num__amount {
+  font-size: 14px;
+  color: #808d9a;
+}
+
+td {
+  padding: 1rem 0.5rem;
+}
+
+td input {
+  width: 5rem;
+  height: 3rem;
+  padding: 0.5rem;
+}
+
+td a {
+  color: orangered;
+  font-size: 1.4rem;
+}
+
+td img {
+  width: 8rem;
+  height: 8rem;
+  margin-right: 1rem;
+}
+
+.total-price {
+  display: flex;
+  justify-content: flex-end;
+  align-items: end;
+  flex-direction: column;
+  margin-top: 2rem;
+}
+
+.total-price table {
+  border-top: 3px solid #fc7c7c;
+  width: 100%;
+  max-width: 35rem;
+}
+
+td:last-child {
+  text-align: right;
+}
+
+th:last-child {
+  text-align: right;
+}
+
+@media only screen and (max-width: 567px) {
+  .cart-info p {
+    display: none;
+  }
+}

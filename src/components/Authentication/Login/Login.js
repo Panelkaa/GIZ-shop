@@ -28,30 +28,15 @@ const Login = ({handleClick}) => {
         token: user.accessToken,
       }));
       push('/GIZ');
+      localStorage.setItem('user', email)
+      // localStorage.removeItem('user');
     })
     .catch(() => {
-      alert('Такого пользователя нет')
+      alert('Такого пользователя не существует')
     });
       
   }
 
-  // const handleLogin = (e, email, password) => {
-  //   e.preventDefault()
-  //   const auth = getAuth();
-
-  //   signInWithEmailAndPassword(auth, email, password)
-  //     .then(({user}) => {
-  //       console.log(user);
-  //       dispatch(setUser({
-  //       email: user.email,
-  //       id: user.uid,
-  //       token: user.accessToken,
-  //     }));
-  //     push('/GIZ');
-  //     })
-  //     .catch(console.error);
-      
-  // }
   
   return ( 
     
@@ -61,9 +46,9 @@ const Login = ({handleClick}) => {
 
           <fieldset>        
               <label htmlFor="mail">Email:</label>
-              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="mail" name="user_email"/>
+              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="mail" name="user_email" required/>
               <label htmlFor="password">Пароль:</label>
-              <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="password" name="user_password"/>
+              <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="password" name="user_password" required/>
                 <button className='enter__btn' type="submit" onClick={handleLogin}>Войти</button>    
                 <p className='switch__login'>
                   Или <Link className='switch__link' to='/GIZ/Registration'>Регистрация</Link>

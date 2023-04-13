@@ -1,0 +1,130 @@
+/* ----------------------FORM-------------------- */
+.form {
+  max-width: 100rem;
+  margin: 0 auto;
+  padding: 10;
+}
+
+.form__one::after {
+  content: "";
+  /* background-color: black; */
+  width: 100%;
+  height: 1px;
+  display: block;
+  margin-bottom: 10px;
+  border: 1px dashed #cfcece;
+}
+
+.form__title {
+  padding: 0;
+  /* color: #555; */
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 32px;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-family: "B612", sans-serif;
+  margin-top: 15px;
+}
+
+.form__item {
+  display: flex;
+  width: 60%;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+.form__item-address {
+  display: flex;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.item__title {
+  width: 30%;
+  /* width: 25%; */
+  margin: 0 4% 0 0;
+}
+
+.item__input {
+  font-size: 12px;
+  line-height: 24px;
+  width: 70%;
+  padding: 4px 6px;
+  border: 1px solid #dddddd;
+  background: #ffffff;
+  color: #444444;
+}
+
+.item__textarea {
+  font-size: 12px;
+  line-height: 24px;
+  width: 70%;
+  padding: 4px 6px;
+  border: 1px solid #dddddd;
+  background: #ffffff;
+  color: #444444;
+  resize: vertical;
+}
+
+.form__delivery {
+  margin-bottom: 30px;
+}
+
+.delivery__block {
+  width: 50%;
+}
+
+.delivery__item {
+  display: flex;
+  background: #e7edee;
+  padding: 10px 10px 10px 5px;
+  margin-bottom: 8px;
+}
+
+.radio {
+  cursor: pointer;
+  margin-right: 12px;
+  margin-bottom: 8px;
+  position: relative;
+  display: inline-block;
+  font-size: 26px;
+  width: 26px;
+  height: 26px;
+}
+
+.delivery__item-title {
+  margin: 0 4% 0 0;
+  margin-left: 20px;
+}
+
+.delivery__display {
+  margin-top: 10px;
+}
+
+.submit {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.submit__btn {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  background: #1598e6;
+  border-radius: 3px;
+  border: none;
+  padding: 0 40px;
+  line-height: 53px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.submit__policy {
+  width: 80%;
+  text-align: center;
+  margin-bottom: 20px;
+}

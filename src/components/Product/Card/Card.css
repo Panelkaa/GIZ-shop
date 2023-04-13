@@ -1,0 +1,191 @@
+h1 {
+  margin: 0;
+}
+
+.theme {
+  background-color: #f6f6f6;
+}
+
+.card {
+}
+
+.card__background {
+  display: flex;
+
+  padding: 20px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 2px 0px;
+  border-radius: 8px;
+}
+
+.card__background-info {
+  display: flex;
+}
+
+.card__block-image {
+  padding: 30px;
+}
+
+.card__title {
+  display: block;
+  /* background-color: rgb(246, 246, 246); */
+  font-size: 32px;
+  font-weight: 700;
+
+  margin-top: 0px;
+  width: calc(100% + 52px);
+  padding: 10px 0px;
+}
+
+.card__img {
+  max-width: 100%;
+}
+
+.card__block-image {
+  width: 50%;
+}
+
+.card__info {
+  width: 50%;
+}
+
+.info__item {
+  margin-bottom: 30px;
+}
+
+.card__status {
+  text-decoration: none;
+  font-size: 20px;
+  margin-bottom: 5px;
+  color: #18c139;
+}
+
+.description__title {
+  color: #1e87f0;
+  text-decoration: none;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.description__text {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+}
+
+.characteristic__block {
+  width: 80%;
+  margin-bottom: 30px;
+}
+
+.item__characteristic {
+  display: flex;
+  color: #94999c;
+  margin-bottom: 10px;
+  justify-content: space-between;
+}
+
+.characteristic__title {
+  width: 80%;
+  font-size: 16px;
+  border-bottom: 1px dashed #94999c; /* Параметры линии */
+}
+
+.line {
+  width: 10%;
+  border-bottom: 1px dashed #94999c; /* Параметры линии */
+}
+
+.characteristic__text {
+  width: 20%;
+  font-size: 16px;
+  margin-left: 20px;
+}
+
+.card__footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.item__price {
+  width: 48%;
+  padding: 15px;
+  color: #232323;
+  font-size: 36px;
+  font-weight: 700;
+  background-color: rgb(255, 255, 255);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 2px 3px 0px;
+  border: 1px solid #efefef;
+  border-radius: 3px;
+}
+
+.price__total {
+  margin-bottom: 15px;
+}
+
+.price__subtext {
+  display: flex;
+  font-size: 12px;
+  margin-top: 10px;
+  justify-content: center;
+}
+
+.card__btn {
+  display: flex;
+}
+
+.btn__price {
+  width: 100%;
+  height: 50px;
+  color: #fff;
+  background-color: #2e394d;
+  border-radius: 3px;
+  transition: 0.5s;
+  cursor: pointer;
+  border: 0px;
+}
+
+.btn__price:hover {
+  background: #1598e6;
+  color: #fff;
+  border-radius: 3px;
+  padding: 0px 20px;
+  text-transform: none;
+  transition: 0.5s;
+  border: 0px;
+}
+
+.item__delivery {
+  width: 48%;
+}
+
+.delivery__title {
+  color: #384761;
+  font-weight: 700;
+}
+
+.delivery__text {
+  font-size: 13px;
+  line-height: 18px;
+  color: #fff;
+  padding: 15px;
+  background: #18c139;
+  margin-top: 15px;
+}
+
+.delivery__info {
+}
+
+.delivery__info-moscow {
+  margin-top: 15px;
+  padding: 15px;
+  background: #fff;
+  border: 1px solid #ff5d5d;
+}
+
+.delivery__text-moscow {
+  display: block;
+  margin-left: 10px;
+  font-size: 14px;
+  line-height: 16px;
+  color: #ff5d5d;
+}

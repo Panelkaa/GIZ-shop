@@ -21,9 +21,9 @@ const Form = ({title, handleClick}) => {
 
           <fieldset>        
               <label htmlFor="mail">Email:</label>
-              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="mail" name="user_email"/>
+              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="mail" name="user_email" required/>
               <label htmlFor="password">Пароль:</label>
-              <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="password" name="user_password"/>
+              <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="password" name="user_password" required/>
                 <button type="submit" onClick={(e) =>  {handleClick(email, password)}}>{title}</button>    
                 <p className='switch__login'>
                   Или <Link className='switch__link' to='/GIZ/Registration'>Регистрация</Link>

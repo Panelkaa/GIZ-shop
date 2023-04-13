@@ -1,10 +1,12 @@
 import React from 'react'
 import './DownHeader.css'
+import { Link } from 'react-router-dom';
+import Main from '../../../images/pngegg.png'
 
 function DownHeader() {
   return (
-    <div>
-        <main>
+    <div className="header">
+        <main className='header__main'>
             <div className="hero-content">
                 <h2><span className="discount"></span>
                     Магазин Giz
@@ -13,8 +15,18 @@ function DownHeader() {
                     <span>Магазин электротранспорта</span>
                     <span>Giz</span> 
                 </h1>
-                <a className="btn" href="#">shop now</a>
+                <Link to='/GIZ/Product'>
+                 <div className="btn" href="#">shop now</div>
+                </Link>
+                
             </div>
+            <div className="hero-content__scooter">
+                <img
+                        src={Main}
+                        alt="[100%x225]"
+                        className='main__back'
+                />
+            </div>         
          </main>
     </div>
   )

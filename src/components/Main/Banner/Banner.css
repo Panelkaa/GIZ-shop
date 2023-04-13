@@ -34,6 +34,10 @@
   line-height: 1;
 }
 
+.btn {
+  cursor: pointer;
+}
+
 .scooter {
   /* width: 1000px; */
 }

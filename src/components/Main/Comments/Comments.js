@@ -1,6 +1,8 @@
 import React from 'react'
 import "./Comments.css"
-import photoComment from "../../../images/profile3.jpg"
+import photoCommentOne from "../../../images/profile3.jpg"
+import photoCommentTwo from "../../../images/profile2.jpg"
+import photoCommentThree from "../../../images/profile1.jpg"
 import brand from "../../../images/brand2.jpg"
 
 function Comments() {
@@ -21,7 +23,7 @@ function Comments() {
             <i className="bx bx-star"></i>
           </div>
           <div className="img-cover">
-            <img src={photoComment} alt="" />
+            <img src={photoCommentOne} alt="" />
           </div>
           <h4>Ира Андропова</h4>
         </div>
@@ -38,7 +40,7 @@ function Comments() {
             <i className="bx bx-star"></i>
           </div>
           <div className="img-cover">
-            <img src={photoComment} alt="" />
+            <img src={photoCommentTwo} alt="" />
           </div>
           <h4>Влдамир Краснов</h4>
         </div>
@@ -57,7 +59,7 @@ function Comments() {
 
           </div>
           <div className="img-cover">
-            <img src={photoComment} alt="" />
+            <img src={photoCommentThree} alt="" />
           </div>
           <h4>Надежда Дымкина</h4>
         </div>

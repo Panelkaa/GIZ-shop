@@ -1,6 +1,8 @@
 import React from 'react'
 import mainSamik from "../../../images/mainSamik.jpg"
-import "./Banner.css"
+import "./Banner.css";
+import { Link } from 'react-router-dom';
+
 
 function Banner() {
   return (
@@ -17,7 +19,9 @@ function Banner() {
               <span>Новая коллекция</span>
               <span>Электросамокатов</span>
             </h1>
-            <a className="btn" href="./product.html">shop now</a>
+            <Link to='/GIZ/Product'>
+              <div className="btn" href="">shop now</div>
+            </Link>
           </div>
         </div>
       </div>

@@ -12,6 +12,7 @@
   display: flex;
   grid-template-columns: repeat(4, 1fr);
   color: var(--white);
+  justify-content: space-between;
 }
 
 .footer-center a:link,
@@ -29,14 +30,37 @@
 .footer-center div {
   color: #f1f1f1;
   font-size: 1.4rem;
+  margin-bottom: 15px;
+  font-size: 16px;
 }
 
 .footer-center h3 {
-  font-size: 1.8rem;
   font-weight: 400;
   margin-bottom: 1rem;
+  font-size: 36px;
+  margin-bottom: 25px;
 }
 
+.footer__title {
+  font-size: 26px;
+}
+
+.icon {
+  font-size: 24px;
+}
+.mapouter {
+  position: relative;
+  text-align: right;
+  height: 280px;
+  width: 600px;
+}
+
+.gmap_canvas {
+  overflow: hidden;
+  background: none !important;
+  height: 280px;
+  width: 600px;
+}
 @media only screen and (max-width: 998px) {
   .footer-container {
     grid-template-columns: repeat(2, 1fr);

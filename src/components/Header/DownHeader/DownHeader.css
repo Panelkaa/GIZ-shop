@@ -2,6 +2,34 @@
   padding: 10rem 0 5rem 0;
 }
 
+.header {
+  width: 100%;
+  height: 100%;
+  height: 100vh;
+  margin: 0;
+}
+
+main {
+  opacity: 1;
+}
+
+.main__back {
+  display: flex;
+  width: 60%;
+  background: no-repeat center;
+  background-size: 100%;
+  background-size: cover;
+  margin-top: 100px;
+  align-items: center;
+  justify-content: center;
+}
+
+.header__main {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
 .advert-center {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
@@ -64,7 +92,7 @@
 }
 
 .advert-box .content {
-  position: absolute;
+  /* position: absolute; */
   top: 50%;
   right: 5%;
   transform: translate(0, -50%);
@@ -108,9 +136,20 @@
 }
 
 .hero-content {
+  width: 50%;
   position: absolute;
   top: 50%;
   transform: translate(25%, -50%);
+  opacity: 1;
+}
+
+.hero-content__scooter {
+  width: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(25%, -50%);
+  opacity: 1;
 }
 
 .hero-content h2 {

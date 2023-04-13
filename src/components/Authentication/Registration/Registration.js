@@ -65,47 +65,7 @@ const Registration = () => {
   // }
   
   return (
-    // <div className='reg__page'> 
-    //   <form className='reg__content' onClick={e => e.stopPropagation()} >
-    //     <h1>Регистрация</h1>
 
-    //     <fieldset>
-    //         <label htmlFor="name">Имя:</label>
-    //         <input type="text" className="name" name="user_name"/>
-    //         <label htmlFor="mail">Email:</label>
-    //         <input type="email" className="mail" name="user_email"/>
-    //         <label htmlFor="password">Пароль:</label>
-    //         <input type="password" className="password" name="user_password"/>
-    //         <label htmlFor="phone">Телефон:</label>
-    //         <input type="text" className="mail" name="user_number" placeholder='+7 ___ ___-__-__'/>
-    //         <input type="date" 
-    //             // value=''
-    //             className={style}    
-    //             aria-required="true" 
-    //             aria-invalid="false" 
-    //             placeholder="Дата рождения" 
-    //             onChange={textDate}
-    //             />
-    //             <label htmlFor="mail">Пол:</label>
-    //             <div className='gender__block'>
-    //               <div className='form_radio_btn'>
-    //                 <input id="radio-1" type="radio" className="gender" name="user_gender" />
-    //                 <label htmlFor="radio-1"><FcBusinessman className='male'/></label>
-    //               </div>
-    //               <div className='form_radio_btn'>
-    //                 <input id="radio-2" type="radio" className="gender" name="user_gender" />
-    //                 <label htmlFor="radio-2"><FcBusinesswoman  className='female'/></label>
-    //               </div>
-    //             </div>
-              
-    //           <button type="submit" onClick={handleRegister}>Зарегистрироваться</button>
-    //           <p className='switch__login'>
-    //             Уже зарегистрированы? <Link className='switch__link' to='/GIZ/Login'>Войти</Link>
-    //           </p>  
-    //     </fieldset>
-    //   </form>
-    // </div>
-    // <div>
       <div className='login__page'>
         <form className='login__content'>
           <h1 className='login__title'>Регистрация</h1>
