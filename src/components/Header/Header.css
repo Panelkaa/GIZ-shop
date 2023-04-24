@@ -43,6 +43,7 @@
 
 .logo__text {
   margin-bottom: 0;
+  cursor: pointer;
 }
 
 .exit__btn {

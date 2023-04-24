@@ -6,7 +6,7 @@ import Main from '../../../images/pngegg.png'
 function DownHeader() {
   return (
     <div className="header">
-        <main className='header__main'>
+        <main className='header__main'>         
             <div className="hero-content">
                 <h2><span className="discount"></span>
                     Магазин Giz

@@ -7,7 +7,7 @@ import {Navigate } from 'react-router-dom'
 import {useDispatch} from 'react-redux';
 import { useAuth } from '../../hooks/use-auth';
 import {removeUser} from '../../store/slice/userSlice.js';
-import { store } from "../../store";
+import logo from '../../images/logo.png';
 
  function Header() {
   const dispatch = useDispatch();
@@ -77,7 +77,8 @@ import { store } from "../../store";
       <nav className="nav">
         <div className="navigation container">
           <div className="logo">
-            <h1 className='logo__text'>GIZ</h1>
+          <img className='logo__text' src={logo} alt="[100%x225]" />
+            {/* <h1 className='logo__text'>{logo}</h1> */}
           </div>
 
         <div className="menu">

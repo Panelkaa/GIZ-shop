@@ -11,7 +11,7 @@ app.use(
 
 const sql = require('mssql/msnodesqlv8');
 // const sql = require('mssql');
-const connection = sql.connect({
+sql.connect({
     user: 'PANELKAA\wonka',
     database: 'giz',
     server: 'PANELKAA\\SQLEXPRESS',

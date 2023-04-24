@@ -2,13 +2,10 @@ import React, { useState,useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import "./OnlyHead.css"
 import { Icon } from '@iconify/react';
-// import { Link } from 'react-router-dom';
-// import { Icon } from '@iconify/react';
-import {Navigate } from 'react-router-dom'
 import {useDispatch} from 'react-redux';
 import { useAuth } from '../../../hooks/use-auth';
 import {removeUser} from '../../../store/slice/userSlice';
-
+import logo from '../../../images/logo2.png';
 
 
 function OnlyHead(order) {
@@ -90,7 +87,10 @@ function OnlyHead(order) {
       <nav className="nav">
         <div className="navigation container">
           <div className="logo">
-            <h1 className='logo__text'>GIZ</h1>
+          <Link to='/GIZ'>
+            <img className='logo__text' src={logo} style={{'width': '55px'}} alt="[100%x225]" />
+          </Link>   
+             {/* <h1 className='logo__text'>GIZ</h1> */}
           </div>
 
         <div className="menu">

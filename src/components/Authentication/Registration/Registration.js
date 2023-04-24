@@ -47,23 +47,6 @@ const Registration = () => {
       
   }
   
-  
-  //  const handleRegister = (e, email, password, ) => {
-  //   e.preventDefault()
-  //   const auth = getAuth();  
-  //   console.log(auth);  
-  //   await createUserWithEmailAndPassword(auth, email, password)
-  //     .then((userCredential) => {
-  //       console.log(userCredential);
-  //       console.log(auth);
-  //       const user = userCredential.user;
-        
-  //       // ...
-  //     })
-  //     .catch(console.error);
-      
-  // }
-  
   return (
 
       <div className='login__page'>
