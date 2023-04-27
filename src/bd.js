@@ -13,7 +13,7 @@ const sql = require('mssql/msnodesqlv8');
 // const sql = require('mssql');
 sql.connect({
     user: 'PANELKAA\wonka',
-    database: 'giz',
+    database: 'giz-shop',
     server: 'PANELKAA\\SQLEXPRESS',
     driver: 'msnodesqlv8',
     options: {
@@ -31,7 +31,61 @@ sql.connect((err) => {
     }
 });
 
+// --------------------- AUTH ------------------------
 
+app.post('/GIZ/Auth/Register', (req, res) => {
+    
+        const userName =  req.body.userName
+        const userSurname =  req.body.userSurname
+        const email =  req.body.email
+        const phone =  req.body.phone
+        const password =  req.body.password
+        const birthday =  req.body.birthday
+        const gender =  Number(req.body.gender)
+
+    sql.query(`SELECT * FROM [dbo].[user] WHERE (eMail = '${email}') OR (phoneNumber = '${phone}')`, (err,data) => {
+        if (err) res.status(500).json(err);
+        if (data.recordset.length) return res.status(409).json('Такой пользователь уже существует');
+        else {
+            sql.query(`USE [giz-shop] 
+            INSERT INTO [dbo].[user]  (name, surname, birthday, phoneNumber, eMail, login, password, role, gender, userPhoto) 
+                VALUES ('${userName}', '${userSurname}', '${birthday}', '${phone}', '${email}', '${email}', '${password}', 2, '${gender}', NUll)`, (err, data) => {
+                if (err) {
+                    res.status(500)
+                    console.error("Err: ", err);
+                } else {
+                    res.status(200)
+                    sql.query(`SELECT * FROM [dbo].[user] WHERE eMail = '${email}'`, (err,data) => {
+                        res.json(data);
+                        console.log(data);
+                    })
+                }
+            })
+        }
+
+        // console.log(data);
+        // console.log(phone);
+    })
+    
+})
+
+app.post('/GIZ/Auth/Login', (req, res) => {
+    const email =  req.body.email
+    const password =  req.body.password
+
+    
+
+    sql.query(`SELECT * FROM [dbo].[user] WHERE eMail = '${email}')`, (err,data) => {
+    if (err) res.status(500).json(err);
+    if (data.recordset.length === 0) return res.status(409).json('Такого пользователя нет');
+    if (data.recordset[0].password !== password) return res.status(400).json('Неправильный пароль');
+    else {
+        res.json(data);
+    }
+    
+})
+
+})
 
 app.get('/GIZ/Product', (req, res) => {
     // var request = new connection.Request();
@@ -45,7 +99,6 @@ app.get('/GIZ/Product', (req, res) => {
         }
     })
 })
-
 
 app.get('/GIZ/Card/Characteristics/:id', (req, res) => {
     sql.query('SELECT  characteristicsList.[nameCharacteristics], ASetCharacteristics.[name],  UnitList.nameUnit, Products.idProduct FROM dbo.characteristicsList INNER JOIN dbo.ASetCharacteristics ON dbo.[ASetCharacteristics].idCharacteristics = dbo.characteristicsList.idCharacteristics INNER JOIN dbo.UnitList ON dbo.[ASetCharacteristics].idUnit = dbo.UnitList.idUnit INNER JOIN dbo.Products ON dbo.Products.idProduct = [ASetCharacteristics].idProduct ', (err, data) => {
@@ -171,18 +224,19 @@ const basketOrder = []
 app.post('/GIZ/Order/Accept', function (req, res) {
     basketOrder.push(req.body)
         const order = JSON.stringify(...req.body.userOrder)
-        const userName =  JSON.stringify(req.body.userName)
-        const userPhone =  JSON.stringify(Number(req.body.userPhone))
-        const userEmail =  JSON.stringify(req.body.userEmail)
-        const userAddress =  JSON.stringify(req.body.userAddress)
-        const userReview =  JSON.stringify(req.body.userReview)
-        const userDelivery =  JSON.stringify(req.body.userDelivery)
-        const orderDate = JSON.stringify(req.body.orderDate)
-        // console.log(userPhone)
+        const userPriceTotal =  req.body.priceTotal
+        const userName =  req.body.userName
+        const userPhone =  Number(req.body.userPhone)
+        const userEmail =  req.body.userEmail
+        const userAddress =  req.body.userAddress
+        const userReview =  req.body.userReview
+        const userDelivery =  req.body.userDelivery
+        const orderDate = req.body.orderDate
+        // console.log(orderDate)
         // ${req.body.orderDate}, 
-            sql.query(`USE giz 
+            sql.query(`USE [giz-shop] 
             INSERT INTO [dbo].[order]  ( idStatusOrder,totalPrice,userName,userPhone,userEmail,userAddress,userReview,userDelivery,orderDate,userOrder) 
-              VALUES (1,44000, '${userName}',${userPhone},'${userEmail}','${userAddress}','${userReview}','${userDelivery}',NULL, '${order}')`, (err, data) => {
+              VALUES (1,'${userPriceTotal}', '${userName}','${userPhone}','${userEmail}','${userAddress}','${userReview}','${userDelivery}','${orderDate}', '${order}')`, (err, data) => {
                 if (err) {
                     res.status(500)
                     console.log("ERROR PZDC");

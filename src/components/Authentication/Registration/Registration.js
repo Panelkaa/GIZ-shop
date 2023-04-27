@@ -8,56 +8,98 @@ import {Link} from 'react-router-dom'
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import {useDispatch} from 'react-redux'
 import {setUser} from '../../../store/slice/userSlice'
-
+import InputMask from 'react-input-mask';
 
 
 
 const Registration = () => {
-  const [style, setStyle] = useState('index-txt');
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [inputs, setInputs] = useState({
+    userName: '',
+    userSurname: '',
+    email: '',
+    phone: '',
+    password: '',
+    birthday: '',
+    gender: '',
+  })
 
-  
-  const textDate = () => {
-      const result = (style ? 'index-txt:before' : 'index-txt');
-      setStyle(result)   
+  console.log(inputs);
+  const [err, setErr] = useState(null)
+
+  const handelChange = (e) => {
+    setInputs((prev) => ({...prev, [e.target.name]: e.target.value}))
   }
 
   const dispatch = useDispatch()
   const push = useNavigate()
 
-  async function handleRegister (e) {
-    e.preventDefault()
-    const auth = getAuth();  
-    console.log(auth);  
-    await createUserWithEmailAndPassword(auth, email, password)
-    .then (({user}) => {
-      console.log(user);
-      console.log(user.email);
-      dispatch(setUser({
-        email: user.email,
-        id: user.uid,
-        token: user.accessToken,
-      }));
-      push('/GIZ');
-    })
-    .catch(() => {
-      alert('Такой пользователь зарегистрирован')
-    });
-      
-  }
   
-  return (
+  const handleRegister = async e => {
+    e.preventDefault()
+      fetch('http://localhost:3002/GIZ/Auth/Register', {
+        method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(inputs),
+      }) 
+      .then(function (response) {
+        if (response.status === 409) {
+          alert('Такой пользователя уже зарегистрирован');
+        }
+        return response.json();
+      })
+      .then ((user) => {
+        dispatch(setUser({
+          profile: user.recordset,      
+        }))
+        console.log(user.recordset[0]);
+        push('/GIZ');
+      })
+      .catch ((err) => {
+        setErr(err)
+      })
+  }
 
+  return (   
       <div className='login__page'>
         <form className='login__content'>
           <h1 className='login__title'>Регистрация</h1>
 
           {/* <fieldset>         */}
-              <label htmlFor="mail">Email:</label>
-              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="mail" name="user_email"/>
+              <label htmlFor="mail">Имя:</label>
+              <input type="email"  onChange={handelChange} className="input" name="userName" maxLength="45"/>
+              <label htmlFor="mail">Фамилия:</label>
+              <input type="email"  onChange={handelChange} className="input" name="userSurname"  maxLength="45"/>
+              <label htmlFor="mail">Почта:</label>
+              <input type="email"  onChange={handelChange} className="input" name="email" placeholder='max@mail.ru' maxLength="45"/>
+              <label htmlFor="mail">Номер телефона:</label>
+              {/* <input type="email" onChange={handelChange} className="input" name="phone" placeholder='+79771234433' maxLength="12"/> */}
+              <InputMask mask="+79999999999" onChange={handelChange} className="input" name="email"></InputMask>
               <label htmlFor="password">Пароль:</label>
-              <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="password" name="user_password"/>
+              <input type="password"  onChange={handelChange} className="input" name="password" maxLength="45"/>
+              <label htmlFor="password">Дата рождения:</label>
+              <input type="date" 
+                className='index-txt'    
+                aria-required="true" 
+                aria-invalid="false" 
+                onChange={handelChange}
+                name="birthday"
+                />
+              <div className='gender__block'>
+                <div className='form_radio_btn'>
+                  <input id="radio-1" type="radio" className="gender" name="gender" value='1' onChange={handelChange}/>
+                  <label htmlFor="radio-1"><FcBusinessman className='male'/></label>
+                </div>
+                <div className='form_radio_btn'>
+                  <input id="radio-2" type="radio" className="gender" name="gender" value='2' onChange={handelChange}/>
+                  <label htmlFor="radio-2"><FcBusinesswoman  className='female'/></label>
+                </div>
+              </div>
+                {/* {err && err} */}
                 <button className='enter__btn' type="submit" onClick={handleRegister}>Зарегистрироваться</button>    
                 <p className='switch__login'>
                    Уже зарегистрированы? <Link className='switch__link' to='/GIZ/Login'>Войти</Link>
@@ -66,7 +108,6 @@ const Registration = () => {
           {/* </fieldset>     */}
         </form>
       </div>
-
   )
 }
 

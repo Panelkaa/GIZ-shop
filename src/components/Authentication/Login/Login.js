@@ -8,36 +8,54 @@ import {useDispatch} from 'react-redux'
 import {setUser} from '../../../store/slice/userSlice'
 
 const Login = ({handleClick}) => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [inputs, setInputs] = useState({
+    email: '',
+    password: '',
+  })
 
+  const [err, setErr] = useState(null)
+
+  const handelChange = (e) => {
+    setInputs((prev) => ({...prev, [e.target.name]: e.target.value}))
+  }
+
+  console.log(inputs);
 
   const dispatch = useDispatch()
   const push = useNavigate()
 
-  async function handleLogin (e) {
+  const handleLogin = async e => {
     e.preventDefault()
-    const auth = getAuth();  
-    console.log(auth);  
-    await signInWithEmailAndPassword(auth, email, password)
-    .then (({user}) => {
-      console.log(user);
-        dispatch(setUser({
-        email: user.email,
-        id: user.uid,
-        token: user.accessToken,
-      }));
+    fetch('http://localhost:3002/GIZ/Auth/Login', {
+        method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(inputs),
+      }) 
+    .then((response) => {
+        if (response.status === 409) {
+          alert('Неправильный логин');
+        }
+        else if (response.status === 400) {
+          alert('Неправильный пароль');
+        }
+        return response.json();
+    })   
+    .then ((user) => {
+      dispatch(setUser({
+        profile: user.recordset,      
+      }))
+      console.log(user.recordset[0]);
       push('/GIZ');
-      localStorage.setItem('user', email)
-      // localStorage.removeItem('user');
     })
-    .catch(() => {
-      alert('Такого пользователя не существует')
-    });
-      
+    
+    .catch((err) => {
+      setErr(err)
+    })
   }
 
-  
   return ( 
     
       <div className='login__page'>
@@ -46,14 +64,14 @@ const Login = ({handleClick}) => {
 
           <fieldset>        
               <label htmlFor="mail">Email:</label>
-              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="mail" name="user_email" required/>
+              <input type="email" onChange={handelChange} className="input" name="email" required/>
               <label htmlFor="password">Пароль:</label>
-              <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="password" name="user_password" required/>
+              <input type="password" onChange={handelChange} className="input" name="password" required/>
                 <button className='enter__btn' type="submit" onClick={handleLogin}>Войти</button>    
                 <p className='switch__login'>
                   Или <Link className='switch__link' to='/GIZ/Registration'>Регистрация</Link>
                 </p>      
-                {/* <button onClick={()=> setRegistration(true)} type="text">Регистрация</button> */}
+                {/* <button onClick={handleLogin} type="text">Регистрация</button> */}
           </fieldset>    
         </form>
       </div>

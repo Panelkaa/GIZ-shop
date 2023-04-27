@@ -5,7 +5,7 @@ import { Icon } from '@iconify/react';
 import {useDispatch} from 'react-redux';
 import { useAuth } from '../../../hooks/use-auth';
 import {removeUser} from '../../../store/slice/userSlice';
-import logo from '../../../images/logo2.png';
+import logo from '../../../images/logo.jpg';
 
 
 function OnlyHead(order) {
@@ -88,7 +88,7 @@ function OnlyHead(order) {
         <div className="navigation container">
           <div className="logo">
           <Link to='/GIZ'>
-            <img className='logo__text' src={logo} style={{'width': '55px'}} alt="[100%x225]" />
+            <img className='logo__text' src={logo} style={{'width': '50px'}} alt="[100%x225]" />
           </Link>   
              {/* <h1 className='logo__text'>GIZ</h1> */}
           </div>

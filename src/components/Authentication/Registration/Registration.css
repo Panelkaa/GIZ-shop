@@ -61,13 +61,17 @@ input[type="date"]:placeholder {
 }
 
 input[type="date"] {
-  width: 200px;
+  width: 100%;
   padding: 12px 20px;
 }
 
 .index-txt {
-  color: green;
-  padding: 12px 20px;
+  background-color: #e8eeef;
+  font-size: 16px;
+  color: black;
+  padding: 15px;
+  margin-bottom: 10px;
+  border: none;
 }
 
 *,
@@ -83,7 +87,7 @@ input[type="date"] {
   text-align: center;
 }
 
-.mail,
+.input,
 .password,
 input[type="tel"],
 input[type="time"],
@@ -99,7 +103,8 @@ select {
   padding: 15px;
   width: 100%;
   background-color: #e8eeef;
-  color: #8a97a0;
+  color: black;
+  /* color: #8a97a0; */
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
   margin-bottom: 10px;
 }
@@ -128,6 +133,7 @@ select {
   border-width: 1px 1px 3px;
   box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
   margin-bottom: 10px;
+  cursor: pointer;
 }
 
 fieldset {

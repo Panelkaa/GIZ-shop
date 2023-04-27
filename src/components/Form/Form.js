@@ -6,7 +6,7 @@ import { AddOrder } from '../../store/slice/userSlice';
 import { store } from "../../store";
 
 function Form(priceTotal) {
-    const [checked, setChecked] = useState();
+    const [checked, setChecked] = useState(false);
     const [userEmail, setUserEmail] = useState(store.getState().user.email ? [...store.getState().user.email] : '');
     //  all input value 
     const [inputName, setInputName] = useState('');
@@ -19,7 +19,7 @@ function Form(priceTotal) {
 
     const deliveryValue = (e) => {
         setInputDelivery(e.target.value)
-        setChecked(true)
+        setChecked(!checked)
     }
 
     const dispatch = useDispatch();
@@ -36,7 +36,7 @@ function Form(priceTotal) {
             userAddress: inputAddress,
             userReview: inputReview,
             userDelivery: inputDelivery,
-            orderDate: new Date(),
+            orderDate: new Date().toLocaleDateString(),
             priceTotal: inputTotalPrice,
             userOrder: JSON.parse(saved),
         }
@@ -105,7 +105,7 @@ function Form(priceTotal) {
                     <p className='form__title'>Сервис доставки</p>
                     <div className='delivery__block'>
                         <div className='delivery__item'>
-                            <input type='radio' id="contactChoice1" checked={checked} className='radio' name="contact" onChange={deliveryValue} />
+                            <input type='radio' id="contactChoice1" checked={checked} className='radio' name="contact" value="Доставка курьером" onChange={deliveryValue} />
                             <label className='delivery__item-title'>
                                 Доставка курьером ( 500 ₽ )
                                 <div className='delivery__display'><div className='delivery__display'>Курьерская доставка по Москве, Московской области</div></div>
@@ -120,7 +120,7 @@ function Form(priceTotal) {
                         </div>
 
                         <div className='delivery__item'>
-                            <input type='radio' id="contactChoice2" className='radio' name="contact" value="Самовывоз" onChange={() => setChecked(false)} />
+                            <input type='radio' id="contactChoice2" className='radio' name="contact" value="Самовывоз" onChange={deliveryValue} />
                             <label className='delivery__item-title'>
                                 Самовывоз ( 0 ₽ )
                                 <div className='delivery__display'>Москва, Большая Семёновская улица, 23А</div>

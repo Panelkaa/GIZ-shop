@@ -7,11 +7,12 @@ import {Navigate } from 'react-router-dom'
 import {useDispatch} from 'react-redux';
 import { useAuth } from '../../hooks/use-auth';
 import {removeUser} from '../../store/slice/userSlice.js';
-import logo from '../../images/logo.png';
+import logo from '../../images/logo.jpg';
 
  function Header() {
   const dispatch = useDispatch();
   const {isAuth, email} = useAuth();
+
   
    return isAuth ? (
     <div>

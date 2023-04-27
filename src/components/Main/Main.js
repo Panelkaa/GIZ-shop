@@ -1,5 +1,5 @@
 import React from 'react'
-import Header from '../Header/Header'
+import HeaderPage from '../Header/HeaderPage'
 import RecommendedProducts from './Offer/RecommendedProducts';
 import Banner from './Banner/Banner';
 import Comments from './Comments/Comments';
