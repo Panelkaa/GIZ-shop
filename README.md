@@ -1,2 +1,9 @@
-![1](https://github.com/Panelkaa/GIZ-shop/assets/92202917/896091b0-8039-4186-b917-a8fbbc22fdd4)
-![2](https://github.com/Panelkaa/GIZ-shop/assets/92202917/94dc017c-2fdd-4254-a3b1-106b2132c192)
+## Pages
+<p float="left" align="center">
+<img width="350" alt="image" src="https://github.com/Panelkaa/GIZ-shop/assets/92202917/e3daf122-040c-4635-9f25-61f7a6cec9c5">
+
+<img width="350" alt="image" src="https://github.com/Panelkaa/GIZ-shop/assets/92202917/de81a119-d0d2-4eba-81b6-0a32641223cb">
+
+<img width="350" alt="image" src="https://github.com/Panelkaa/GIZ-shop/assets/92202917/f697426b-d773-4610-8b39-59bace1adc61">
+</p>
+
