@@ -9,7 +9,7 @@ import {  faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 function Footer() {
   return (
     <div>
-      <footer id="footer" className="section footer">
+      <footer id="footer" className=" footer">
         <div className="container">
           <div className="footer-container">
 
@@ -26,7 +26,7 @@ function Footer() {
                 <span>
                 <FontAwesomeIcon className='icon' icon={faEnvelope}></FontAwesomeIcon>
                 </span>
-                Electro-samokat@gmail.com
+                Electro-transport@gmail.com
               </div>
               <div>
                 <span>
@@ -42,7 +42,7 @@ function Footer() {
               </div>
             </div>
             <div className="footer-center">
-            <div className="mapouter"><div className="gmap_canvas"><iframe  width="600" height="280" id="gmap_canvas" src="https://maps.google.com/maps?q=%D0%91%D0%BE%D0%BB%D1%8C%D1%88%D0%B0%D1%8F%20%D0%A1%D0%B5%D0%BC%D1%91%D0%BD%D0%BE%D0%B2%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0,%2023%D0%90&t=&z=13&ie=UTF8&iwloc=&output=embed" frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0"></iframe><a href="https://fmovies-online.net"></a><a href="https://www.embedgooglemap.net"></a></div></div>
+            <div className="mapouter"><div className="gmap_canvas"><iframe className='map'  width="600" height="280" id="gmap_canvas" src="https://maps.google.com/maps?q=%D0%91%D0%BE%D0%BB%D1%8C%D1%88%D0%B0%D1%8F%20%D0%A1%D0%B5%D0%BC%D1%91%D0%BD%D0%BE%D0%B2%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0,%2023%D0%90&t=&z=13&ie=UTF8&iwloc=&output=embed" frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0"></iframe><a href="https://fmovies-online.net"></a><a href="https://www.embedgooglemap.net"></a></div></div>
             </div>
           </div>
         </div>

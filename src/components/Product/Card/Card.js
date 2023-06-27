@@ -3,11 +3,8 @@ import "./Card.css";
 import { store } from "../../../store";
 import {useDispatch} from 'react-redux';
 import {AddOrder} from '../../../store/slice/userSlice';
-import OnlyHead from '../../Header/OnlyHead/OnlyHead';
-import Footer from '../../Footer/Footer';
 
-
-function Card(props) {
+function Card() {
   const [card, setCard] = useState([]);
   const [productOrder, setProductOrder] = useState([...store.getState().user.AddOrder]);
   const [characteristics, setCharacteristics] = useState();
@@ -48,29 +45,27 @@ function Card(props) {
     }))    
     localStorageOrder.push(localStorage.setItem("order", JSON.stringify(productOrder)));   
 }
-// console.log(productOrder);
-// console.log(characteristics);
+
   return (
     <div className='theme'>
-      <OnlyHead count = {props.count}/>
           <section className="section all-products">        
                 <div className="product-center container">  
                 
                     {card && card.map((item, i) =>
                       <div key={i} className='card'>
                         <div className='card__title'>
-                          <h1>{item.nameElectro} {item.ModelElectro}</h1>
+                          <h1 >{item.nameElectro} {item.ModelElectro}</h1>
                         </div>
                         <div className='card__background'>  
                           
                             <div className='card__block-image' >
-                              <img className='card__img' src={require(`../../../images/products/${item.image}`)} alt="[100%x225]" />
+                              <img className='card__img' src={require(`../../../images/products/${item.image.split('/')[11]}`)} alt="[100%x225]" />
                               
                             </div> 
                         
                           <div className='card__info'>
                           <div className='info__item'>
-                            <p className='card__status'>{item.nameStatus}</p>
+                            {item.nameStatus === 'В наличии' ? <p className='card__status'>{item.nameStatus}</p> : <p className='card__status notAvailable'>{item.nameStatus}</p>}
                             <p className='description__title'>Описание товара:</p>
                             <p className='description__text'>{item.description}</p>
                           </div>
@@ -118,7 +113,7 @@ function Card(props) {
                                 <div className='item__price'> 
                                   <p className='price__total'>{Intl.NumberFormat('ru-RU').format(item.priceElectro)} руб.</p>
                                   <div className='card__btn'>
-                                    <button className='btn__price' onClick={handlerOrder}>В корзину</button>
+                                  {item.nameStatus === 'В наличии' ?  <button className='btn__price' onClick={handlerOrder}>В корзину</button> :  <button className='btnNotAvailable' onClick={() => {handlerOrder(item)}}>Нет в наличии</button>}   
                                   </div>
                                   <span className='price__subtext'>Купить в один клик</span>
                                 </div>
@@ -136,12 +131,9 @@ function Card(props) {
                             
                           </div>   
                       </div>
-                    )}
-                    
-                </div>  
-                
+                    )}                   
+                </div>                 
         </section>
-      <Footer />
     </div>
   )
 }

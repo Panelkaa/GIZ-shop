@@ -12,7 +12,6 @@ function OnlyHead(order) {
   const [countBucket, setCountBucket] = useState()
   const dispatch = useDispatch();
   const {isAuth, email} = useAuth();
-  const {user, setUser} = useState();
 
 
 
@@ -21,11 +20,10 @@ function OnlyHead(order) {
     const res = localStorage.getItem("order");
     const count = JSON.parse(res);
     setCountBucket(count.length)
-    // console.log(user);
   })
 
   return isAuth ?( 
-    // <div>
+    <div>
       <header id="home" >
           <nav className="nav">
             <div className="navigation container">
@@ -55,7 +53,9 @@ function OnlyHead(order) {
                 <li className="nav-item">
                   <a href="#footer" className="nav-link">Контакты</a>
                 </li>
-              <Link to='/GIZ'>{isAuth ? (<span className='userEmail'> {email} <button className='exit__btn' onClick={() => dispatch(removeUser())}>Выйти</button> </span>) : (<li className="nav-item">
+              {/* <Link to='/GIZ'>{isAuth ? (<span className='userEmail'> {email} <button className='exit__btn' onClick={() => dispatch(removeUser())}>Выйти</button> </span>)  */}
+              <Link to='/GIZ/Profile'>{isAuth ? (<span className='nav-item'> Профиль </span>) 
+              : (<li className="nav-item">
                 Вход
                 </li>)}
               </Link>       
@@ -78,11 +78,11 @@ function OnlyHead(order) {
           </div>
         </nav>
       </header>
-    //  </div>
+     </div>
    
   ) : (  
      
-
+    <div>
     <header id="home" >
       <nav className="nav">
         <div className="navigation container">
@@ -141,7 +141,7 @@ function OnlyHead(order) {
 
   </header>
 
- 
+  </div>
   )
 }
 

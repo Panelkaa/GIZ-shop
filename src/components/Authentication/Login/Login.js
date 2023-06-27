@@ -33,27 +33,26 @@ const Login = ({handleClick}) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(inputs),
-      }) 
-    .then((response) => {
-        if (response.status === 409) {
-          alert('Неправильный логин');
-        }
-        else if (response.status === 400) {
-          alert('Неправильный пароль');
-        }
-        return response.json();
-    })   
-    .then ((user) => {
-      dispatch(setUser({
-        profile: user.recordset,      
-      }))
-      console.log(user.recordset[0]);
-      push('/GIZ');
-    })
-    
-    .catch((err) => {
-      setErr(err)
-    })
+    }) 
+      .then((response) => {
+          if (response.status === 409) {
+            alert('Неправильный логин');
+          }
+          else if (response.status === 400) {
+            alert('Неправильный пароль');
+          }
+          return response.json();
+      })   
+        .then ((user) => {
+          dispatch(setUser({
+            profile: user.recordset,      
+          }))
+          console.log(user.recordset[0]);
+          push('/GIZ');
+      })  
+      .catch((err) => {
+        setErr(err)
+      })
   }
 
   return ( 
@@ -71,7 +70,6 @@ const Login = ({handleClick}) => {
                 <p className='switch__login'>
                   Или <Link className='switch__link' to='/GIZ/Registration'>Регистрация</Link>
                 </p>      
-                {/* <button onClick={handleLogin} type="text">Регистрация</button> */}
           </fieldset>    
         </form>
       </div>

@@ -6,9 +6,6 @@ h1 {
   background-color: #f6f6f6;
 }
 
-.card {
-}
-
 .card__background {
   display: flex;
 
@@ -58,6 +55,13 @@ h1 {
   font-size: 20px;
   margin-bottom: 5px;
   color: #18c139;
+}
+
+.notAvailable {
+  text-decoration: none;
+  font-size: 20px;
+  margin-bottom: 5px;
+  color: red;
 }
 
 .description__title {
@@ -154,6 +158,28 @@ h1 {
   border: 0px;
 }
 
+.btn__price-disable {
+  width: 100%;
+  height: 50px;
+  color: #fff;
+  background-color: #5dce59;
+  border-radius: 3px;
+  transition: 0.5s;
+  cursor: pointer;
+  border: 0px;
+}
+
+.btnNotAvailable {
+  width: 100%;
+  height: 50px;
+  color: #fff;
+  background-color: #5f6369;
+  border-radius: 3px;
+  transition: 0.5s;
+  border: 0px;
+  pointer-events: none;
+}
+
 .item__delivery {
   width: 48%;
 }
@@ -188,4 +214,42 @@ h1 {
   font-size: 14px;
   line-height: 16px;
   color: #ff5d5d;
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 0 3rem;
+  }
+
+  .card__background {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card__info {
+    width: 100%;
+  }
+
+  .card__block-image {
+    width: 100%;
+  }
+}
+
+@media (max-width: 400px) {
+  .container {
+    padding: 0 1rem;
+  }
+  .card__footer {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .item__price {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  .item__delivery {
+    width: 100%;
+  }
 }

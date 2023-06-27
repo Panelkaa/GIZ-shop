@@ -8,7 +8,10 @@ import brand from "../../../images/brand2.jpg"
 function Comments() {
   return (
     <div>
-        <section className="section">
+      <section className="section">
+        <div className="title">
+          <h1>Отзывы</h1>
+        </div>
       <div className="testimonial-center container">
         <div className="testimonial">
           <span>&ldquo;</span>

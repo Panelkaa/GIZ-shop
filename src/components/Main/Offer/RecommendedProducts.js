@@ -4,6 +4,8 @@ import "./Section.css";
 import {AddOrder} from '../../../store/slice/userSlice';
 import { store } from "../../../store";
 import {useDispatch} from 'react-redux'
+import { Link } from "react-router-dom";
+import {electroID} from '../../../store/slice/userSlice';
 
 function RecommendedProducts() {
   const [productOrder, setProductOrder] = useState([...store.getState().user.AddOrder]);
@@ -39,9 +41,16 @@ function RecommendedProducts() {
         }))       
         
         localStorageOrder.push(localStorage.setItem("order", JSON.stringify(productOrder)));     
-    })   
-    
+    })    
 }
+
+  const handlerCard = (id) => {
+    console.log(id);
+    localStorage.setItem("id", JSON.stringify(id));
+    dispatch(electroID({
+        electroID: +id,
+    }))      
+  }
 
   return (
     <div>
@@ -53,27 +62,30 @@ function RecommendedProducts() {
         <div className="product-center container">
           {recommendedArr &&
             recommendedArr.map((item, i) => (
-              <div key={i} id={item.idProduct} className="product">
-                <div className="product-header">
-                  <img
-                    src={require(`../../../images/products/${item.image}`)}
-                    alt="[100%x225]"
-                  />
+              <Link to={`/GIZ/Card/${item.idProduct}`}>
+                <div key={i} id={item.idProduct} className="product">
+                  <div className="product-header">
+                    <img
+                      src={require(`../../../images/products/${item.image.split('/')[11]}`)}
+                      alt="[100%x225]"
+                    />
 
-                
-                </div>
+                  
+                  </div>
 
-                <div className="product-footer">
-                  <h3 className='product__title' key={item.uniqueId}>{item.nameOfMaker} {item.ModelElectro}</h3>           
-                  <h4 key={item.uniqueId} className="price">Цена: {Intl.NumberFormat('ru-RU').format(item.priceElectro)} руб.</h4>
-                 
-                  <div className='product__btn'>
-                    <button className='btn__price' onClick={() => {handlerOrder(item.idProduct)}}>В корзину</button>
+                  <div className="product-footer">
+                    {/* {item.nameOfMaker} {item.ModelElectro} */}
+                    {/* <Link to={`/GIZ/Card/${item.idProduct}`}> */}
+                      <h3 className='product__title' key={item.uniqueId} onClick={() => {handlerCard(item.idProduct)}}>{item.nameOfMaker} {item.ModelElectro}</h3>
+                        
+                    <h4 key={item.uniqueId} className="price">Цена: {Intl.NumberFormat('ru-RU').format(item.priceElectro)} руб.</h4>
+                  
+                    <div className='product__btn'>
+                      <button className='btn__price' onClick={() => {handlerOrder(item.idProduct)}}>В корзину</button>
+                    </div>
                   </div>
                 </div>
-
-                
-              </div>
+              </Link>  
             ))}
         </div>
       </section>

@@ -1,0 +1,232 @@
+.profile {
+  display: flex;
+}
+
+.section__profile {
+  padding: 2rem;
+}
+
+.navUser {
+  width: 80%;
+  padding: 0px 0px 0px 100px;
+}
+
+.navTitle {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: black;
+}
+
+.avatar {
+  width: 200px;
+  height: 200px;
+  margin-bottom: 5px;
+}
+
+.profile__title {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: black;
+  margin-bottom: 15px;
+}
+
+.exit__btn {
+  width: 60px;
+  height: 25px;
+  background-color: rgb(247, 0, 0);
+  color: white;
+  cursor: pointer;
+}
+
+/* UserOrders -----------------------------------*/
+
+.order {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  margin-top: 20px;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.3s;
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+  width: 100%;
+}
+
+.orderItem {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.orderTop {
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.3s;
+  width: 100%;
+  background-color: #bbcee7;
+  padding: 20px;
+}
+
+.orderStatus {
+  justify-content: right;
+  margin-top: 10px;
+}
+
+.price {
+  color: #001a34;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.infoUser {
+  display: flex;
+  flex-direction: column;
+}
+
+.orderName {
+  display: flex;
+}
+
+.title {
+  font-weight: 600;
+}
+
+.profile__subTitle {
+  font-size: 17px;
+  line-height: 1.25;
+  color: black;
+  margin-bottom: 5px;
+}
+
+.profile__sub {
+  font-size: 18px;
+  line-height: 1.25;
+  color: black;
+}
+
+.profile__subOrder {
+  font-size: 18px;
+  line-height: 1.25;
+  color: black;
+}
+
+.profile__sub:nth-child(1) {
+  width: 40%;
+}
+
+.profile__subTitle:nth-child(1) {
+  width: 70%;
+}
+.profile__subTitle:nth-child(2) {
+  /* width: 30%; */
+}
+
+.statusText {
+  font-size: 16px;
+  line-height: 1.25;
+  color: #b1b9c2;
+  margin-right: 10px;
+}
+
+.status {
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  color: #fff;
+  display: inline-flex;
+  font-size: 14px;
+  font-weight: var(--fontBold);
+  line-height: 1.29;
+  padding: 3px 8px;
+  margin-left: 10px;
+
+  background-color: #b1b9c2;
+}
+
+.noOrder {
+  display: flex;
+  font-size: 20px;
+  justify-content: center;
+  align-items: center;
+  color: #94999c;
+}
+
+@media (max-width: 780px) {
+  .container {
+  }
+}
+
+@media (max-width: 567px) {
+  .profile {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .navUser {
+    width: 100%;
+    padding: 2rem 0px 0px 0px;
+  }
+
+  .infoUser {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+@media (max-width: 425px) {
+  .profile {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .navUser {
+    width: 100%;
+    padding: 2rem 0px 0px 0px;
+  }
+
+  .infoUser {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .profile__subTitle:nth-child(2) {
+    width: 100%;
+  }
+
+  .orderTop {
+    align-items: center;
+  }
+
+  .profile__subOrder {
+    font-size: 14px;
+  }
+
+  .profile__sub {
+    font-size: 14px;
+  }
+
+  .profile__subTitle {
+    font-size: 14px;
+  }
+
+  .profile__subTitle:nth-child(2) {
+    width: 50%;
+  }
+
+  .statusText {
+    font-size: 14px;
+  }
+
+  .price {
+    font-size: 16px;
+  }
+}

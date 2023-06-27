@@ -19,19 +19,21 @@
 }
 
 .header {
+  display: block;
   position: relative;
   width: 100%;
-  min-height: 100vh;
+  /* min-height: 20vh; */
   background-color: var(--grey-alt);
   overflow: hidden;
 }
 
 .nav {
+  display: block;
   width: 100%;
   padding: 1.6rem 0;
   background-color: rgb(59, 96, 151);
   color: white;
-  position: fixed;
+  /* position: fixed; */
   top: 0;
   z-index: 3;
 }
@@ -44,11 +46,6 @@
 .logo__text {
   margin-bottom: 0;
   cursor: pointer;
-}
-
-.exit__btn {
-  width: 60px;
-  height: 25px;
 }
 
 .navigation container {
@@ -241,7 +238,7 @@ a {
 
 @media only screen and (max-width: 996px) {
   .header {
-    min-height: 70vh;
+    min-height: 20vh;
   }
 
   .header .hero-img {
@@ -275,9 +272,5 @@ a {
 
   .hero-content h1 span {
     font-size: 4rem;
-  }
-
-  .hero-content a {
-    padding: 1rem 3rem;
   }
 }

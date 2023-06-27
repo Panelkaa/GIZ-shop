@@ -24,8 +24,7 @@ const Registration = () => {
     birthday: '',
     gender: '',
   })
-
-  console.log(inputs);
+  
   const [err, setErr] = useState(null)
 
   const handelChange = (e) => {
@@ -71,23 +70,24 @@ const Registration = () => {
 
           {/* <fieldset>         */}
               <label htmlFor="mail">Имя:</label>
-              <input type="email"  onChange={handelChange} className="input" name="userName" maxLength="45"/>
-              <label htmlFor="mail">Фамилия:</label>
-              <input type="email"  onChange={handelChange} className="input" name="userSurname"  maxLength="45"/>
+              <input type="name"  onChange={handelChange} className="input" required name="userName" maxLength="45"/>
+              <label htmlFor="name">Фамилия:</label>
+              <input type="name"  onChange={handelChange} className="input" required name="userSurname"  maxLength="45"/>
               <label htmlFor="mail">Почта:</label>
-              <input type="email"  onChange={handelChange} className="input" name="email" placeholder='max@mail.ru' maxLength="45"/>
+              <input type="name"  onChange={handelChange} className="input" required name="email" maxLength="45"/>
               <label htmlFor="mail">Номер телефона:</label>
               {/* <input type="email" onChange={handelChange} className="input" name="phone" placeholder='+79771234433' maxLength="12"/> */}
-              <InputMask mask="+79999999999" onChange={handelChange} className="input" name="email"></InputMask>
+              <InputMask mask="+79999999999" onChange={handelChange} className="input" name="phone" required></InputMask>
               <label htmlFor="password">Пароль:</label>
-              <input type="password"  onChange={handelChange} className="input" name="password" maxLength="45"/>
+              <input type="password"  onChange={handelChange} className="input" required name="password" maxLength="45"/>
               <label htmlFor="password">Дата рождения:</label>
               <input type="date" 
-                className='index-txt'    
+                className='input'    
                 aria-required="true" 
                 aria-invalid="false" 
                 onChange={handelChange}
                 name="birthday"
+                required
                 />
               <div className='gender__block'>
                 <div className='form_radio_btn'>
@@ -100,10 +100,17 @@ const Registration = () => {
                 </div>
               </div>
                 {/* {err && err} */}
-                <button className='enter__btn' type="submit" onClick={handleRegister}>Зарегистрироваться</button>    
+                {!inputs.userName.length || !inputs.phone.length || !inputs.userSurname.length || !inputs.email.length || !inputs.phone.length || !inputs.password.length ?
+                        <button className='enter__btn' type="submit" onClick={handleRegister}>Зарегистрироваться</button>   
+                        :
+                        <Link to={'/GIZ'}>
+                            <button className='enter__btn' type="submit" onClick={handleRegister}>Зарегистрироваться</button>   
+                        </Link>
+                    }
+                {/* <button className='enter__btn' type="submit" onClick={handleRegister}>Зарегистрироваться</button>     */}
                 <p className='switch__login'>
                    Уже зарегистрированы? <Link className='switch__link' to='/GIZ/Login'>Войти</Link>
-              </p>      
+                </p>      
                 {/* <button onClick={()=> setRegistration(true)} type="text">Регистрация</button> */}
           {/* </fieldset>     */}
         </form>

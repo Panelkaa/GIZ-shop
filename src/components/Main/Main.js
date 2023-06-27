@@ -11,12 +11,10 @@ import OnlyHead from '../Header/OnlyHead/OnlyHead';
 function Main() {
   return (
     <div> 
-        <OnlyHead />
-        <DownHeader />
+        <HeaderPage />
         <RecommendedProducts />
         <Banner />
         <Comments />   
-        <Footer />
     </div>
   )
 }

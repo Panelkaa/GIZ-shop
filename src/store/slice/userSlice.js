@@ -14,7 +14,6 @@ const userSlice = createSlice({
     reducers: {
         setUser(state, action) {
             state.profile = action.payload.profile;
-            console.log(state.profile);
             localStorage.setItem('user', JSON.stringify(...state.profile))
         },
         removeUser (state) {
@@ -23,13 +22,10 @@ const userSlice = createSlice({
         },
         electroID(state, action) {  
             state.electroID = action.payload.electroID;
-            console.log("ID", state.electroID)
         },  
         AddOrder(state, action) {  
             state.AddOrder = action.payload.AddOrder;  
             state.countBucket = state.AddOrder.length
-            console.log("AddOrder", state.AddOrder)
-            // console.log("count", state.countBucket)   
         },  
             
     },

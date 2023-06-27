@@ -1,11 +1,11 @@
 const express = require('express');
 const app = express();
 app.use(express.json()); 
-app.use(express.urlencoded({ extended: true }));
-const cors = require("cors")
+app.use(express.urlencoded({ extended: true })); 
+const cors = require("cors");
 app.use(
     cors({
-        origin: "http://localhost:3000"
+        origin: "http://localhost:3000",
     })
 )
 
@@ -53,7 +53,8 @@ app.post('/GIZ/Auth/Register', (req, res) => {
                 if (err) {
                     res.status(500)
                     console.error("Err: ", err);
-                } else {
+                }if (data.recordset[0].password !== password) return res.status(400).json('Неправильный пароль')
+                else {
                     res.status(200)
                     sql.query(`SELECT * FROM [dbo].[user] WHERE eMail = '${email}'`, (err,data) => {
                         res.json(data);
@@ -62,34 +63,47 @@ app.post('/GIZ/Auth/Register', (req, res) => {
                 }
             })
         }
-
-        // console.log(data);
-        // console.log(phone);
-    })
-    
+    })  
 })
 
 app.post('/GIZ/Auth/Login', (req, res) => {
     const email =  req.body.email
     const password =  req.body.password
-
     
+    console.log(req.body.email);
+    sql.query(`SELECT * FROM [dbo].[user] WHERE eMail = '${email}'`, (err,data) => {
+        if (err) res.status(500).json(err);
+        if (data.recordset.length === 0) return res.status(409).json('Такого пользователя нет');
+        if (data.recordset[0].password !== password) return res.status(400).json('Неправильный пароль');
+        else {
+            res.json(data);
+        }
+        console.log(data);
+    })
+})
 
-    sql.query(`SELECT * FROM [dbo].[user] WHERE eMail = '${email}')`, (err,data) => {
-    if (err) res.status(500).json(err);
-    if (data.recordset.length === 0) return res.status(409).json('Такого пользователя нет');
-    if (data.recordset[0].password !== password) return res.status(400).json('Неправильный пароль');
-    else {
-        res.json(data);
-    }
+// ---------------------------------AUTH--------------------------------
+
+// ------------------ PROFILE --------------------------------------------
+
+app.post('/GIZ/Profile/Orders', (req, res) => {
+    const email =  req.body.eMail
+    sql.query(`SELECT userOrder,totalPrice,orderDate, [statusOrder].statusOrderName FROM [dbo].[order] INNER JOIN dbo.statusOrder ON dbo.[order].idStatusOrder = dbo.statusOrder.[idStatusOrder] WHERE userEmail = '${email}'`, (err,data) => {
+        if (err) res.status(500).json(err);
+        else{
+            res.json(data.recordset)
+        }
+    })
     
 })
 
-})
+app.get('/GIZ/Profile/UserOrders', function (req, res) {
+    res.json();
+});
 
 app.get('/GIZ/Product', (req, res) => {
-    // var request = new connection.Request();
-    sql.query('SELECT [Products].[idProduct],nameElectro, [Models].[ModelElectro], [maker].[nameOfMaker], [Products].[description],[Color].[nameColor],[TypeElectro].[typeElectro],Country.[nameCountry],[productStatuses].nameStatus, priceElectro,priceTotal, image, count FROM            dbo.[Products] INNER JOIN dbo.Models ON dbo.[Products].model = dbo.[Models].[idModel]  INNER JOIN dbo.Color ON dbo.[Products].idColor = dbo.Color.[idColor] INNER JOIN dbo.TypeElectro ON dbo.[Products].idTypeElectro = dbo.TypeElectro.[idTypeElectro]  INNER JOIN dbo.Country ON dbo.[Products].country = dbo.Country.[idCountry] INNER JOIN dbo.productStatuses ON dbo.[Products].[idProductStatus] = dbo.productStatuses.idStatusProduct INNER JOIN dbo.[maker] ON dbo.[Models].idMaker = dbo.[maker].idMaker', (err, data) => {
+    // sql.query('SELECT [Products].[idProduct], [Models].[ModelElectro], [maker].[nameOfMaker], [Products].[description],[Color].[nameColor],[TypeElectro].[nameTypeElectro],Country.[nameCountry],[productStatuses].nameStatus, priceElectro,priceTotal, image, count FROM            dbo.[Products] INNER JOIN dbo.Models ON dbo.[Products].model = dbo.[Models].[idModel]  INNER JOIN dbo.Color ON dbo.[Products].idColor = dbo.Color.[idColor] INNER JOIN dbo.TypeElectro ON dbo.[Products].idTypeElectro = dbo.TypeElectro.[idTypeElectro]  INNER JOIN dbo.Country ON dbo.[Products].country = dbo.Country.[idCountry] INNER JOIN dbo.productStatuses ON dbo.[Products].[idProductStatus] = dbo.productStatuses.idStatusProduct INNER JOIN dbo.[maker] ON dbo.[Models].idMaker = dbo.[maker].idMaker', (err, data) => {
+    sql.query(`SELECT [Products].[idProduct], [Models].[ModelElectro], [maker].[nameOfMaker], [Products].[description],[Color].[nameColor],[TypeElectro].[nameTypeElectro],Country.[nameCountry],[productStatuses].nameStatus, priceElectro,priceTotal, image = REPLACE(image, '\\', '/'), count FROM            dbo.[Products] INNER JOIN dbo.Models ON dbo.[Products].model = dbo.[Models].[idModel]  INNER JOIN dbo.Color ON dbo.[Products].idColor = dbo.Color.[idColor] INNER JOIN dbo.TypeElectro ON dbo.[Products].idTypeElectro = dbo.TypeElectro.[idTypeElectro]  INNER JOIN dbo.Country ON dbo.[Products].country = dbo.Country.[idCountry] INNER JOIN dbo.productStatuses ON dbo.[Products].[idProductStatus] = dbo.productStatuses.idStatusProduct INNER JOIN dbo.[maker] ON dbo.[Models].idMaker = dbo.[maker].idMaker`, (err, data) => {
         if (err) {
             console.error("Err: ", err);
             return res.status(500)
@@ -113,7 +127,7 @@ app.get('/GIZ/Card/Characteristics/:id', (req, res) => {
 })
 
 app.get('/GIZ/Recommended', (req, res) => {
-    sql.query('SELECT [Products].[idProduct],nameElectro, [Models].[ModelElectro], [maker].[nameOfMaker], [Products].[description],[Color].[nameColor],[TypeElectro].[typeElectro],Country.[nameCountry],[productStatuses].nameStatus, priceElectro,priceTotal, image, count FROM            dbo.[Products] INNER JOIN dbo.Models ON dbo.[Products].model = dbo.[Models].[idModel]  INNER JOIN dbo.Color ON dbo.[Products].idColor = dbo.Color.[idColor] INNER JOIN dbo.TypeElectro ON dbo.[Products].idTypeElectro = dbo.TypeElectro.[idTypeElectro]  INNER JOIN dbo.Country ON dbo.[Products].country = dbo.Country.[idCountry] INNER JOIN dbo.productStatuses ON dbo.[Products].[idProductStatus] = dbo.productStatuses.idStatusProduct INNER JOIN dbo.[maker] ON dbo.[Models].idMaker = dbo.[maker].idMaker', (err, data) => {
+    sql.query(`SELECT [Products].[idProduct], [Models].[ModelElectro], [maker].[nameOfMaker], [Products].[description],[Color].[nameColor],[TypeElectro].[nameTypeElectro],Country.[nameCountry],[productStatuses].nameStatus, priceElectro,priceTotal, image = REPLACE(image, '\\', '/'), count FROM            dbo.[Products] INNER JOIN dbo.Models ON dbo.[Products].model = dbo.[Models].[idModel]  INNER JOIN dbo.Color ON dbo.[Products].idColor = dbo.Color.[idColor] INNER JOIN dbo.TypeElectro ON dbo.[Products].idTypeElectro = dbo.TypeElectro.[idTypeElectro]  INNER JOIN dbo.Country ON dbo.[Products].country = dbo.Country.[idCountry] INNER JOIN dbo.productStatuses ON dbo.[Products].[idProductStatus] = dbo.productStatuses.idStatusProduct INNER JOIN dbo.[maker] ON dbo.[Models].idMaker = dbo.[maker].idMaker`, (err, data) => {
         if (err) {
             console.error("Err: ", err);
             return res.status(500)
@@ -137,7 +151,7 @@ app.get('/GIZ/LastProducts', (req, res) => {
 })
 
 app.get('/GIZ/Card/:id', (req, res) => {
-    sql.query('SELECT [Products].[idProduct],nameElectro, [Models].[ModelElectro], [maker].[nameOfMaker], [Products].[description],[Color].[nameColor],[TypeElectro].[typeElectro],Country.[nameCountry],[productStatuses].nameStatus, priceElectro,priceTotal, image, count FROM            dbo.[Products] INNER JOIN dbo.Models ON dbo.[Products].model = dbo.[Models].[idModel]  INNER JOIN dbo.Color ON dbo.[Products].idColor = dbo.Color.[idColor] INNER JOIN dbo.TypeElectro ON dbo.[Products].idTypeElectro = dbo.TypeElectro.[idTypeElectro]  INNER JOIN dbo.Country ON dbo.[Products].country = dbo.Country.[idCountry] INNER JOIN dbo.productStatuses ON dbo.[Products].[idProductStatus] = dbo.productStatuses.idStatusProduct INNER JOIN dbo.[maker] ON dbo.[Models].idMaker = dbo.[maker].idMaker', (err, data) => {
+    sql.query(`SELECT [Products].[idProduct], [Models].[ModelElectro], [maker].[nameOfMaker], [Products].[description],[Color].[nameColor],[TypeElectro].[nameTypeElectro],Country.[nameCountry],[productStatuses].nameStatus, priceElectro,priceTotal, image = REPLACE(image, '\\', '/'), count FROM            dbo.[Products] INNER JOIN dbo.Models ON dbo.[Products].model = dbo.[Models].[idModel]  INNER JOIN dbo.Color ON dbo.[Products].idColor = dbo.Color.[idColor] INNER JOIN dbo.TypeElectro ON dbo.[Products].idTypeElectro = dbo.TypeElectro.[idTypeElectro]  INNER JOIN dbo.Country ON dbo.[Products].country = dbo.Country.[idCountry] INNER JOIN dbo.productStatuses ON dbo.[Products].[idProductStatus] = dbo.productStatuses.idStatusProduct INNER JOIN dbo.[maker] ON dbo.[Models].idMaker = dbo.[maker].idMaker`, (err, data) => {
         if (err) {
             res.status(500)
         } else {
@@ -148,17 +162,17 @@ app.get('/GIZ/Card/:id', (req, res) => {
 })
 
 app.get('/GIZ/Product/:type/:maker/:country/:color', (req, res) => {
-    sql.query('SELECT [Products].[idProduct],nameElectro, [Models].[ModelElectro], [maker].[nameOfMaker], [Products].[description],[Color].[nameColor],[TypeElectro].[typeElectro],Country.[nameCountry],[productStatuses].nameStatus, priceElectro,priceTotal, image, count FROM            dbo.[Products] INNER JOIN dbo.Models ON dbo.[Products].model = dbo.[Models].[idModel]  INNER JOIN dbo.Color ON dbo.[Products].idColor = dbo.Color.[idColor] INNER JOIN dbo.TypeElectro ON dbo.[Products].idTypeElectro = dbo.TypeElectro.[idTypeElectro]  INNER JOIN dbo.Country ON dbo.[Products].country = dbo.Country.[idCountry] INNER JOIN dbo.productStatuses ON dbo.[Products].[idProductStatus] = dbo.productStatuses.idStatusProduct INNER JOIN dbo.[maker] ON dbo.[Models].idMaker = dbo.[maker].idMaker', (err, data) => {
+    sql.query(`SELECT [Products].[idProduct], [Models].[ModelElectro], [maker].[nameOfMaker], [Products].[description],[Color].[nameColor],[TypeElectro].[nameTypeElectro],Country.[nameCountry],[productStatuses].nameStatus, priceElectro,priceTotal, image = REPLACE(image, '\\', '/'), count FROM            dbo.[Products] INNER JOIN dbo.Models ON dbo.[Products].model = dbo.[Models].[idModel]  INNER JOIN dbo.Color ON dbo.[Products].idColor = dbo.Color.[idColor] INNER JOIN dbo.TypeElectro ON dbo.[Products].idTypeElectro = dbo.TypeElectro.[idTypeElectro]  INNER JOIN dbo.Country ON dbo.[Products].country = dbo.Country.[idCountry] INNER JOIN dbo.productStatuses ON dbo.[Products].[idProductStatus] = dbo.productStatuses.idStatusProduct INNER JOIN dbo.[maker] ON dbo.[Models].idMaker = dbo.[maker].idMaker`, (err, data) => {
         if (err) {
             res.status(500)
         } else {
-            console.log(req.params);
+            console.log(req.params.type);
             // console.log(data.recordset.filter((item) => item.nameColor === req.params.color));
             if (req.params.type === 'allType' && req.params.maker === 'allMaker' && req.params.country === 'allCountry' && req.params.color === 'allColor') {
                 res.json(data.recordset)
             }
             else if (req.params.type !== 'allType' && req.params.maker === 'allMaker' && req.params.country === 'allCountry' && req.params.color === 'allColor') {
-                res.json(data.recordset.filter((item) => item.typeElectro === req.params.type))
+                res.json(data.recordset.filter((item) => item.nameTypeElectro === req.params.type))
             }
             else if (req.params.type !== 'allType' && req.params.maker !== 'allMaker' && req.params.country === 'allCountry' && req.params.color === 'allColor') {
                 res.json(data.recordset.filter((item) => item.typeElectro === req.params.type && item.nameOfMaker === req.params.maker))
@@ -219,6 +233,7 @@ app.get('/GIZ/Product/:type/:maker/:country/:color', (req, res) => {
     })
 })
 
+
 const basketOrder = []
 
 app.post('/GIZ/Order/Accept', function (req, res) {
@@ -236,7 +251,7 @@ app.post('/GIZ/Order/Accept', function (req, res) {
         // ${req.body.orderDate}, 
             sql.query(`USE [giz-shop] 
             INSERT INTO [dbo].[order]  ( idStatusOrder,totalPrice,userName,userPhone,userEmail,userAddress,userReview,userDelivery,orderDate,userOrder) 
-              VALUES (1,'${userPriceTotal}', '${userName}','${userPhone}','${userEmail}','${userAddress}','${userReview}','${userDelivery}','${orderDate}', '${order}')`, (err, data) => {
+              VALUES (2,'${userPriceTotal}', '${userName}', '${userPhone}','${userEmail}','${userAddress}','${userReview}','${userDelivery}','${orderDate}', '${order}')`, (err, data) => {
                 if (err) {
                     res.status(500)
                     console.log("ERROR PZDC");
@@ -252,6 +267,8 @@ app.get('/GIZ/Order/Accept', function (req, res) {
     res.json(basketOrder);
     basketOrder.length = 0
 });
+
+
 
 
 app.listen(3002, () => {

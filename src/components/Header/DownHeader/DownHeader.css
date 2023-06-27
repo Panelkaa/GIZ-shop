@@ -1,11 +1,11 @@
 .section {
-  padding: 10rem 0 5rem 0;
+  padding: 0rem 0 5rem 0;
 }
 
 .header {
   width: 100%;
-  height: 100%;
-  height: 100vh;
+  /* height: 100%; */
+  /* height: 100vh; */
   margin: 0;
 }
 
@@ -15,17 +15,18 @@ main {
 
 .main__back {
   display: flex;
-  width: 60%;
+  width: 100%;
   background: no-repeat center;
   background-size: 100%;
   background-size: cover;
-  margin-top: 100px;
+  /* margin-top: 100px; */
   align-items: center;
   justify-content: center;
 }
 
 .header__main {
   width: 100%;
+  height: 100%;
   display: flex;
   justify-content: space-between;
 }
@@ -179,5 +180,42 @@ main {
   color: #fff;
   font-weight: 600;
   text-transform: uppercase;
+  border-radius: 3px;
   margin-top: 3rem;
+}
+
+@media only screen and (max-width: 567px) {
+  .header {
+    min-height: 50vh;
+  }
+
+  .header .hero-img {
+    height: 40rem;
+    bottom: -15%;
+  }
+
+  .hero-content {
+    top: 40%;
+    transform: translate(15%, -50%);
+  }
+
+  .header .hero-img {
+    right: 0%;
+  }
+
+  .hero-content h2 {
+    font-size: 1.8rem;
+  }
+
+  .hero-content h1 span {
+    font-size: 4rem;
+  }
+
+  .main__back {
+    height: 50vh;
+  }
+
+  .btn {
+    padding: 1rem 2rem;
+  }
 }

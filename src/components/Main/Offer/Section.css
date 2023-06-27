@@ -1,7 +1,10 @@
 /* Featured Products */
+.section {
+  padding: 5rem 0 0rem 0;
+}
 
 .title {
-  margin: 4rem 0 7rem 0;
+  margin: 0rem 0 4rem 0;
   text-align: center;
 }
 

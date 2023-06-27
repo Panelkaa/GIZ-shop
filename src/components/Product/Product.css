@@ -2,6 +2,13 @@
   color: black;
 }
 
+.top {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+  gap: 7rem 3rem;
+  display: flex;
+}
+
 .top__title {
   display: block;
   margin-top: 2rem;
@@ -292,6 +299,26 @@ form .arrow {
   .product-detail .left {
     width: 30rem;
     height: 45rem;
+  }
+  .top {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .section .top {
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between; */
+    margin-bottom: 2rem;
+  }
+
+  .top {
+    gap: 1rem 3rem;
+  }
+
+  .top__title {
+    margin-top: 2rem;
+    margin-bottom: 0px;
   }
 
   .product-detail .details {

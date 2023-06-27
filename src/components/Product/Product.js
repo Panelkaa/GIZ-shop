@@ -1,17 +1,13 @@
-import React, { useState, useEffect } from 'react'
-import Footer from '../Footer/Footer';
+import React, { useState, useEffect } from 'react';
 import "./Product.css"
 import { Icon } from '@iconify/react';
-import OnlyHead from '../Header/OnlyHead/OnlyHead';
 import {useDispatch} from 'react-redux'
 import {electroID} from '../../store/slice/userSlice';
 import {AddOrder} from '../../store/slice/userSlice';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {  faWeightScale } from "@fortawesome/free-solid-svg-icons";
-import {  faGauge } from "@fortawesome/free-solid-svg-icons";
-import {  faBolt } from "@fortawesome/free-solid-svg-icons";
 import { store } from "../../store";
+// app.use('/local-files', express.static('/'));
+
 
 function Product() {
     const [productsArr, setProducts] = useState();
@@ -26,7 +22,6 @@ function Product() {
     const [selectsFilterCountry, setSelectsFilterCountry] = useState('allCountry');
     const [selectsFilterColor, setSelectsFilterColor] = useState('allColor');
 
-
     const dispatch = useDispatch();
 
    
@@ -37,6 +32,7 @@ function Product() {
            .then(data => {
             setProducts(data.recordset)
             setSortArr(data.recordset)
+            console.log(data.recordset);
            })          
         }
         fetchData()    
@@ -92,29 +88,29 @@ function Product() {
         }))      
     }
 
-    const handlerOrder = (e) => {  
-        const idCard = e.target.parentElement.parentElement.parentElement.id;
-        const localStorageOrder = [localStorage.getItem('order')];
+    const handlerOrder = (item) => {  
+        const localStorageOrder = [localStorage.getItem('order')];      
+        let checkItem = false;
 
-        productsArr.forEach((item) => {
-            if (+idCard === item.idProduct) { 
-                productOrder.push(item)   
-
-            }else  { 
-                return (productOrder)
-            }    
-            dispatch(AddOrder({
-                AddOrder: [...productOrder],
-            }))       
-            
-            localStorageOrder.push(localStorage.setItem("order", JSON.stringify(productOrder)));     
-        })   
-        
+        productOrder.forEach(el => {
+            if(el.idProduct === item.idProduct)
+            {checkItem = true
+                console.log(el.idProduct);
+            }
+        })
+            if(!checkItem) {      
+                productOrder.push(item);
+                console.log(item);
+                dispatch(AddOrder({
+                    AddOrder: [...productOrder],
+                }))     
+                localStorageOrder.push(localStorage.setItem("order", JSON.stringify(productOrder)));     
+            }
     } 
+    
 
   return (
     <div>
-        <OnlyHead count = {count}/>
         <section className="section all-products" id="products">
             <div className="top container">
                
@@ -197,21 +193,18 @@ function Product() {
             </div>
             
             <div className="product-center container">
-                <div className="product-center container">               
                 {search === '' || selects === 'default' ? sortArr && sortArr.filter((item) =>
-                                    item.nameElectro.toLowerCase().toString().includes(search)  || item.ModelElectro.toLowerCase().toString().includes(search) || item.nameOfMaker.toLowerCase().toString().includes(search)
+                                   item.ModelElectro.toLowerCase().toString().includes(search) || item.nameOfMaker.toLowerCase().toString().includes(search)
                                 ).map((item, i) => 
                                     <div key={i} id={item.idProduct} className="product" onClick={()=> {handlerCard(item.idProduct)}}>
                                         <Link to={`/GIZ/Card/${item.idProduct}`}>
                                             <div className="product-header">
-                                                <img src={require(`../../images/products/${item.image}`)} alt="[100%x225]" />
-                                                
+                                                <img src={require(`../../images/products/${item.image.split('/')[11]}`)} alt="[100%x225]"/>
                                                 {/* <ul className="icons">
                                                     <span><Icon icon="bx:heart" /></span>
                                                     <span onClick={handlerOrder}><Icon icon="bx:shopping-bag" /></span>
                                                     <span><Icon icon="bx:search" /></span>
-                                                </ul>  */}
-                                                
+                                                </ul>  */}                                    
                                             </div>
                                         </Link>
                                         <div className="product-footer">                                      
@@ -220,18 +213,18 @@ function Product() {
                                             </h3>
                                             <h4 key={item.uniqueId} className="price">Цена: {Intl.NumberFormat('ru-RU').format(item.priceElectro)}  ₽</h4>
                                             <div className='product__btn'>
-                                                <button className='btn__price' onClick={handlerOrder}>В корзину</button>
+                                                {item.nameStatus === 'В наличии' ?  <button className='btn__price' onClick={() => {handlerOrder(item)}}>В корзину</button> :  <button className='btnNotAvailable' onClick={() => {handlerOrder(item)}}>Нет в наличии</button>}   
                                             </div>
                                         </div>
                                     </div>
 
                 ) : sortArr.filter((item) =>
-                                    item.nameElectro.toLowerCase().toString().includes(search) || item.ModelElectro.toLowerCase().toString().includes(search) || item.nameOfMaker.toLowerCase().toString().includes(search)
+                                     item.ModelElectro.toLowerCase().toString().includes(search) || item.nameOfMaker.toLowerCase().toString().includes(search)
                                 ).map((item, i) => 
                                     <div key={i} id={item.idProduct} className="product" onClick={()=> {handlerCard(item.idProduct)}}>
                                         <Link to={`/GIZ/Card/${item.idProduct}`}>
                                             <div className="product-header">
-                                                <img key={item.uniqueId}  src={require(`../../images/products/${item.image}`)} alt="[100%x225]" />
+                                                <img key={item.uniqueId}  src={require(`../../images/products/${item.image.split('/')[11]}`)} alt="[100%x225]" />
                                             </div>
                                         </Link>
 
@@ -242,7 +235,7 @@ function Product() {
                                         </h3>
                                             <h4 key={item.uniqueId} className="price">Цена: {item.priceElectro} ₽</h4>
                                             <div className='product__btn'>
-                                                <button className='btn__price' onClick={handlerOrder}>В корзину</button>
+                                                <button className='btn__price' onClick={() => {handlerOrder(item)}}>В корзину</button>
                                             </div>
                                         </div>
                                     </div>
@@ -257,16 +250,15 @@ function Product() {
 
                                                     
                     {selects === 'asc' ? selects === 'asc' && sortArr.sort((a,b) => a.priceElectro - b.priceElectro) && sortArr.filter((item) =>
-                                    item.nameElectro.toLowerCase().includes(search) || item.ModelElectro.toLowerCase().toString().includes(search) 
+                                     item.ModelElectro.toLowerCase().toString().includes(search) 
                                 ).map((item) => 
                                     
                                 {/* asc */}
                     ) : selects === 'desc' && sortArr.sort((a,b) => b.priceElectro - a.priceElectro) && sortArr.filter((item) =>
-                                        item.nameElectro.toLowerCase().includes(search) || item.ModelElectro.toLowerCase().toString().includes(search)  
+                                         item.ModelElectro.toLowerCase().toString().includes(search)  
                                     ).map((item, i) => 
                                  {/* desc */}
                     )}
-                    </div>
             </div>  
         </section> 
         <section className="pagination">
@@ -280,8 +272,7 @@ function Product() {
         
         
         </section>
-        
-        <Footer />
+
     </div>
 
   )

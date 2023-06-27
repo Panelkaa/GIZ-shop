@@ -5,15 +5,14 @@
 }
 
 .middle {
+  font-size: 20px;
   text-align: center;
   padding: 25px 0;
   color: #94999c;
 }
 
 .cart {
-  /* margin: 10rem auto; */
-  padding-top: 10rem;
-  padding-bottom: 10rem;
+  padding: 2rem 0;
   display: block;
 }
 
@@ -208,5 +207,10 @@ th:last-child {
 @media only screen and (max-width: 567px) {
   .cart-info p {
     display: none;
+  }
+
+  .cart {
+    padding: 0 3rem;
+    display: block;
   }
 }

@@ -2,6 +2,7 @@
   background-color: var(--black);
   padding: 6rem 1rem;
   line-height: 3rem;
+  margin: 5rem 0 0 0;
 }
 
 .footer-center span {
@@ -72,5 +73,42 @@
   .footer-container {
     grid-template-columns: 1fr;
     row-gap: 2rem;
+  }
+
+  .mapouter {
+    position: relative;
+    text-align: right;
+    height: 220px;
+    width: 350px;
+  }
+
+  .gmap_canvas {
+    overflow: hidden;
+    background: none !important;
+    height: 280px;
+    width: 360px;
+  }
+
+  .map {
+    height: 220px;
+    width: 450px;
+  }
+}
+
+@media only screen and (max-width: 427px) {
+  .footer-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .gmap_canvas {
+    overflow: hidden;
+    background: none !important;
+    height: 280px;
+    width: 360px;
+  }
+
+  .mapouter {
+    display: none;
   }
 }
